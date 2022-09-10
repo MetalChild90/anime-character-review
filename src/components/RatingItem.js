@@ -1,49 +1,43 @@
 import PropTypes from "prop-types";
 import Box from "./shared/Box";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import RatingContext from "../context/RatingContext";
 import { FiMoreHorizontal } from "react-icons/fi";
 import defaultImage from "../assets/images/defaultimage.png";
 import useToggle from "../hooks/useToggle";
 import { motion } from "framer-motion";
 import Star from "./Star";
-import $ from "jquery";
 
 const RatingItem = ({ item }) => {
   const { deleteRating, editRating } = useContext(RatingContext);
 
-  const [coords, setCoords] = useState({ x: "", y: "" });
   const [openButtons, toggleOpenButtons] = useToggle(false);
   const [showReview, toggleShowReview] = useToggle(false);
 
-  const handleClick = (e) => {
-    setCoords({ x: e.pageX, y: e.pageY });
+  const handleClick = () => {
     toggleOpenButtons();
   };
 
   const handleEditClick = (e) => {
     e.stopPropagation();
-    editRating(item);
     toggleOpenButtons();
-    setCoords({ x: "", y: "" });
+    editRating(item);
   };
 
   const handleDeleteClick = (e) => {
     e.stopPropagation();
+    toggleOpenButtons();
     deleteRating(item.id);
-    setCoords({ x: "", y: "" });
   };
 
   const handleShowReviewClick = (e) => {
     e.stopPropagation();
-    toggleShowReview();
     toggleOpenButtons();
-    setCoords({ x: "", y: "" });
+    toggleShowReview();
   };
 
   const handleActionButtonsWrapperClick = () => {
     toggleOpenButtons();
-    setCoords({ x: "", y: "" });
   };
 
   const colors = {
@@ -53,14 +47,6 @@ const RatingItem = ({ item }) => {
     4: "#FFC107",
     5: "#FFEB3B",
   };
-
-  const starSpans = [];
-
-  for (let v = 1; v <= 5; v++) {
-    starSpans.push(
-      <Star key={v} color={colors[item.score]} isFilled={v <= item.score} />
-    );
-  }
 
   return (
     <motion.div
@@ -75,16 +61,9 @@ const RatingItem = ({ item }) => {
           {openButtons && (
             <div
               className="Item-actionButtons-wrapper"
-              style={{ minHeight: $(document).height() }}
               onClick={handleActionButtonsWrapperClick}
             >
-              <div
-                className={`Item-actionButtons`}
-                style={{
-                  top: openButtons && coords.y,
-                  left: openButtons && coords.x,
-                }}
-              >
+              <div className={`Item-actionButtons`}>
                 <button
                   className="Button Button-fullWidth"
                   onClick={handleShowReviewClick}
@@ -113,9 +92,18 @@ const RatingItem = ({ item }) => {
               src={item.image ? item.image : defaultImage}
               alt={item.name ? item.name : "Default Image"}
               className="Item-image"
+              style={{ width: item.image ? "auto" : "200px" }}
             />
           </div>
-          <div className="Item-scoreBox"> {starSpans}</div>
+          <div className="Item-scoreBox">
+            {Array.from({ length: 5 }, (_, i) => (
+              <Star
+                key={i + 1}
+                color={colors[item.score]}
+                isFilled={i + 1 <= item.score}
+              />
+            ))}
+          </div>
           <p className="Item-name">{item.name}</p>
           <p>{item.anime}</p>
           {showReview && (

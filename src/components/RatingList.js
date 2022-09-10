@@ -3,14 +3,16 @@ import RatingContext from "../context/RatingContext";
 import RatingItem from "./RatingItem";
 
 const RatingList = () => {
-  const { ratings } = useContext(RatingContext);
+  const { ratings, reverse } = useContext(RatingContext);
 
   if (!ratings || ratings.length === 0) {
-    return <p>No charactes rated yet</p>;
+    return (
+      <p style={{ color: !reverse && "#796b93" }}>No charactes rated yet</p>
+    );
   }
 
   return (
-    <div>
+    <div className="RatingList">
       {ratings.map((item) => {
         return <RatingItem key={item.id} item={item} />;
       })}

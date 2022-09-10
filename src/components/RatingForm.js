@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import RatingContext from "../context/RatingContext";
 import { BsFillFileEarmarkArrowUpFill } from "react-icons/bs";
-import Button from "./shared/Button";
 import Box from "./shared/Box";
 import Rating from "./Rating";
 import $ from "jquery";
 
 function RatingForm() {
-  const { addRating, updateRating, edition } = useContext(RatingContext);
+  const { addRating, updateRating, edition, setEdition } =
+    useContext(RatingContext);
 
   const [rating, setRating] = useState({
     name: "",
@@ -20,6 +20,7 @@ function RatingForm() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    setMessage("");
     setRating({
       name: edition.item.name,
       anime: edition.item.anime,
@@ -38,7 +39,7 @@ function RatingForm() {
     setMessage("");
     let file = e.target.files[0];
 
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
       let fileInfo = {
@@ -73,6 +74,13 @@ function RatingForm() {
     ) {
       setMessage("Please, choose anime series character came from");
       return;
+    } else if (
+      rating.score === undefined ||
+      rating.score === 0 ||
+      rating.score === null
+    ) {
+      setMessage("Please, choose score");
+      return;
     } else {
       if (edition.edit) {
         updateRating(edition.item.id, rating);
@@ -81,6 +89,23 @@ function RatingForm() {
       }
     }
 
+    cleanForm();
+  };
+
+  const symbolsCount = () => {
+    if (rating.review !== undefined) {
+      return rating.review.length > 0 ? `${rating.review.length}/300` : "0/300";
+    } else {
+      return "0/300";
+    }
+  };
+
+  const handleDiscardChanges = () => {
+    cleanForm();
+    setEdition({ edit: false, item: {} });
+  };
+
+  const cleanForm = () => {
     setRating({
       name: "",
       anime: "",
@@ -94,17 +119,9 @@ function RatingForm() {
     $("#fileControl").val("");
   };
 
-  const symbolsCount = () => {
-    if (rating.review !== undefined) {
-      return rating.review.length > 0 ? `${rating.review.length}/300` : "0/300";
-    } else {
-      return "0/300";
-    }
-  };
-
   return (
     <Box>
-      <form className="Form" onSubmit={handleSubmit}>
+      <form className="Form" onSubmit={handleSubmit} autoComplete="off">
         <div>
           <input
             className="Form-input Form-inputSmall"
@@ -150,10 +167,27 @@ function RatingForm() {
             addScore={(value) => setRating({ ...rating, score: value })}
           />
         </div>
-        <Button version="huge" type="submit">
-          Send Rating
-        </Button>
-        {message && <p>{message}</p>}
+        {edition.edit ? (
+          <div className="Form-editButtons">
+            <button
+              className="Button Button-huge Button-delete"
+              onClick={handleDiscardChanges}
+            >
+              Discard Changes
+            </button>
+            <button
+              className="Button Button-huge Form-saveChangesBtn"
+              type="submit"
+            >
+              Save Changes
+            </button>
+          </div>
+        ) : (
+          <button className="Button Button-huge" type="submit">
+            Send Rating
+          </button>
+        )}
+        {message && <p className="Form-message">{message}</p>}
       </form>
     </Box>
   );

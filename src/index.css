@@ -35,6 +35,7 @@
 
 body {
   font-family: Helvetica, Arial, sans-serif;
+  color: var(--white);
 }
 
 .wrapper {
@@ -42,8 +43,8 @@ body {
   flex-direction: column;
   align-items: center;
   max-width: 1200px;
-  margin: 0 auto;
   min-height: calc(100vh - 130px);
+  margin: 0 auto;
   overflow: hidden;
 }
 
@@ -51,9 +52,8 @@ body {
 .Footer,
 .Box {
   padding: var(--paddingSmall);
-  color: var(--white);
-  background-color: var(--black-opacity);
   text-align: center;
+  background-color: var(--black-opacity);
 }
 
 .Footer {
@@ -62,10 +62,10 @@ body {
 }
 
 .Box {
-  border-radius: var(--radiusMedium);
   display: inline-block;
   padding: var(--paddingMedium);
   margin: var(--marginMedium);
+  border-radius: var(--radiusMedium);
   color: var(--white);
 }
 
@@ -98,27 +98,28 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 150px;
-  position: absolute;
-  /* justify-content: center;
-  align-items: center; */
+  min-width: 250px;
   padding: var(--paddingSuperSmall);
-  background-color: var(--black-opacity);
   border-radius: var(--radiusMedium);
-  z-index: 5;
+  background-color: var(--black-opacity);
+  z-index: 2;
 }
 
 .Item-actionButtons-wrapper {
-  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: transparent;
+  height: 100vh;
+  background-color: var(--black-opacity);
+  z-index: 1;
 }
 
 .Item-image {
   max-height: 300px;
-
   margin-top: var(--marginMedium);
   margin-bottom: var(--marginBig);
   padding: var(--padding);
@@ -151,10 +152,10 @@ body {
 }
 
 .Form-input {
-  border-radius: var(--radiusSmall);
   min-height: 30px;
   padding: var(--paddingSuperSmall);
   margin: var(--marginSuperSmall);
+  border-radius: var(--radiusSmall);
   font-size: 16px;
   font-family: Helvetica, Arial, serif;
   outline: none;
@@ -169,29 +170,29 @@ body {
 }
 
 .Form-symbolCount {
-  text-align: right;
   margin-right: 10px;
+  text-align: right;
 }
 
 input[type="file"] {
   display: none;
 }
 .custom-file-upload {
-  max-width: 200px;
-  border: 1px solid var(--white);
   display: inline-block;
-  padding: var(--paddingSuperSmall) var(--paddingSmall);
-  border-radius: var(--radiusSmall);
-  cursor: pointer;
-  transition: var(--transition-duration);
+  max-width: 200px;
   margin: var(--marginSmall);
-  color: var(--white);
+  padding: var(--paddingSuperSmall) var(--paddingSmall);
+  border: 1px solid var(--white);
+  border-radius: var(--radiusSmall);
+  background-color: var(--violet);
+  transition: var(--transition-duration);
+  cursor: pointer;
 }
 
 .custom-file-upload:hover {
+  border: 1px solid var(--violet);
   background-color: var(--white);
   color: var(--violet);
-  border: 1px solid var(--violet);
 }
 
 .Form-activeControls {
@@ -202,16 +203,16 @@ input[type="file"] {
 }
 
 .Button {
-  display: flex;
-  justify-content: center;
-  max-width: 200px;
+  display: inline-block;
+  text-align: center;
+  max-width: 300px;
+  margin: 0 auto;
   padding: var(--paddingSuperSmall);
-  border-radius: var(--radiusSmall);
   border: 1px solid var(--black);
+  border-radius: var(--radiusSmall);
+  font-size: 14px;
   background-color: var(--pink);
   color: var(--black);
-  font-size: 14px;
-  margin: 0 auto;
   transition: var(--transition-duration);
   cursor: pointer;
 }
@@ -223,8 +224,8 @@ input[type="file"] {
 }
 
 .Button-huge {
-  font-size: 18px;
   padding: var(--paddingSuperSmall) var(--paddingMedium);
+  font-size: 18px;
 }
 
 .Button-normal {
@@ -240,13 +241,22 @@ input[type="file"] {
   width: 100%;
 }
 
+.Form-discardChangesBtn {
+  background-color: var(--red);
+}
+
+.Form-saveChangesBtn {
+  background-color: rgb(55, 172, 114);
+  margin-left: var(--marginSmall);
+}
+
 .Stats {
   display: flex;
-  width: 60%;
   justify-content: space-between;
-  color: var(--violet);
+  width: 60%;
   font-weight: bold;
   font-size: 18px;
+  color: var(--violet);
 }
 
 .Stats.reversed {
@@ -254,8 +264,8 @@ input[type="file"] {
 }
 
 .Item-name {
-  font-weight: bold;
   margin-bottom: var(--marginSuperSmall);
+  font-weight: bold;
 }
 
 .ToggleTheme {
@@ -265,9 +275,9 @@ input[type="file"] {
   top: 20px;
   right: 50px;
   width: 70px;
-  background-color: var(--grey);
   padding: var(--paddingSuperSmall);
   border-radius: var(--radiusBig);
+  background-color: var(--grey);
   cursor: pointer;
 }
 
@@ -277,8 +287,8 @@ input[type="file"] {
   left: 5px;
   width: 27px;
   height: 27px;
-  background-color: var(--white-opacity);
   border-radius: var(--radiusRound);
+  background-color: var(--white-opacity);
   transform: translateX(0);
   transition: var(--transition-duration);
 }
@@ -289,4 +299,8 @@ input[type="file"] {
 
 .ToggleTheme-icon {
   z-index: 1;
+}
+
+.RatingList {
+  display: flex;
 }

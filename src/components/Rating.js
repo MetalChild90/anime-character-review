@@ -1,14 +1,9 @@
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Star from "./Star";
 
 function Rating({ addScore, score }) {
-  const [value, setValue] = useState(0);
   const [dynamicValue, setDynamicValue] = useState(0);
-
-  useEffect(() => {
-    setValue(score);
-  }, [score]);
 
   const colors = {
     1: "#f44336",
@@ -27,7 +22,6 @@ function Rating({ addScore, score }) {
   };
 
   const handleClick = (newValue) => {
-    setValue(newValue);
     addScore(newValue);
   };
 
@@ -36,30 +30,24 @@ function Rating({ addScore, score }) {
   };
 
   const handleMouseLeave = () => {
-    setDynamicValue(value);
+    setDynamicValue(score);
   };
-
-  const starSpans = [];
-
-  for (let v = 1; v <= 5; v++) {
-    starSpans.push(
-      <Star
-        key={v}
-        color={colors[value]}
-        isFilled={v <= dynamicValue}
-        value={v}
-        handleClick={handleClick}
-        handleMouseEnter={handleMouseEnter}
-        handleMouseLeave={handleMouseLeave}
-        clickable={true}
-      />
-    );
-  }
 
   return (
     <div className="Rating">
-      <p>{value ? meanings[value] : "Not Rated Yet"}</p>
-      {starSpans}
+      <p>{score ? meanings[score] : "Not Rated Yet"}</p>
+      {Array.from({ length: 5 }, (_, i) => (
+        <Star
+          key={i + 1}
+          color={colors[score]}
+          isFilled={i + 1 <= dynamicValue}
+          value={i + 1}
+          handleClick={handleClick}
+          handleMouseEnter={handleMouseEnter}
+          handleMouseLeave={handleMouseLeave}
+          clickable={true}
+        />
+      ))}
     </div>
   );
 }
