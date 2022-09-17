@@ -10,14 +10,11 @@
   --pink: #efd4e7;
   --yellow: rgb(255, 255, 128);
 
-  --paddingSuperSmall: 10px;
-  --paddingSmall: 20px;
-  --paddingMedium: 30px;
-
-  --marginSuperSmall: 10px;
-  --marginSmall: 20px;
-  --marginMedium: 40px;
-  --marginBig: 60px;
+  --SuperSmall: 10px;
+  --Small: 20px;
+  --Normal: 30px;
+  --Medium: 40px;
+  --Big: 60px;
 
   --radiusSmall: 5px;
   --radiusMedium: 15px;
@@ -51,7 +48,7 @@ body {
 .Header,
 .Footer,
 .Box {
-  padding: var(--paddingSmall);
+  padding: var(--Small);
   text-align: center;
   background-color: var(--black-opacity);
 }
@@ -63,8 +60,8 @@ body {
 
 .Box {
   display: inline-block;
-  padding: var(--paddingMedium);
-  margin: var(--marginMedium);
+  padding: var(--Normal);
+  margin: var(--Medium);
   border-radius: var(--radiusMedium);
   color: var(--white);
 }
@@ -99,7 +96,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   min-width: 250px;
-  padding: var(--paddingSuperSmall);
+  padding: var(--SuperSmall);
   border-radius: var(--radiusMedium);
   background-color: var(--black-opacity);
   z-index: 2;
@@ -120,8 +117,8 @@ body {
 
 .Item-image {
   max-height: 300px;
-  margin-top: var(--marginMedium);
-  margin-bottom: var(--marginBig);
+  margin-top: var(--Medium);
+  margin-bottom: var(--Big);
   padding: var(--padding);
 }
 
@@ -135,7 +132,7 @@ body {
 }
 
 .Item-scoreBox {
-  margin-bottom: var(--marginSmall);
+  margin-bottom: var(--Small);
 }
 
 .Star {
@@ -147,30 +144,26 @@ body {
 .Form {
   display: flex;
   flex-direction: column;
-  min-width: 700px;
+  width: 100%;
   text-align: center;
 }
 
 .Form-input {
   min-height: 30px;
-  padding: var(--paddingSuperSmall);
-  margin: var(--marginSuperSmall);
+  width: 100%;
+  padding: var(--SuperSmall);
+  margin-top: var(--SuperSmall);
   border-radius: var(--radiusSmall);
   font-size: 16px;
   font-family: Helvetica, Arial, serif;
   outline: none;
 }
 
-.Form-inputSmall {
-  width: 47%;
-}
-
-.Form-inputBig {
-  width: 97%;
+.Form-textarea-wrapper {
+  position: relative;
 }
 
 .Form-symbolCount {
-  margin-right: 10px;
   text-align: right;
 }
 
@@ -180,8 +173,8 @@ input[type="file"] {
 .custom-file-upload {
   display: inline-block;
   max-width: 200px;
-  margin: var(--marginSmall);
-  padding: var(--paddingSuperSmall) var(--paddingSmall);
+  margin: var(--Small);
+  padding: var(--SuperSmall) var(--Small);
   border: 1px solid var(--white);
   border-radius: var(--radiusSmall);
   background-color: var(--violet);
@@ -199,7 +192,12 @@ input[type="file"] {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: var(--marginSmall);
+  margin: var(--Small);
+}
+
+.Form-editButtons {
+  display: flex;
+  justify-content: center;
 }
 
 .Button {
@@ -207,7 +205,7 @@ input[type="file"] {
   text-align: center;
   max-width: 300px;
   margin: 0 auto;
-  padding: var(--paddingSuperSmall);
+  padding: var(--SuperSmall);
   border: 1px solid var(--black);
   border-radius: var(--radiusSmall);
   font-size: 14px;
@@ -224,7 +222,7 @@ input[type="file"] {
 }
 
 .Button-huge {
-  padding: var(--paddingSuperSmall) var(--paddingMedium);
+  padding: var(--SuperSmall) var(--Normal);
   font-size: 18px;
 }
 
@@ -247,13 +245,13 @@ input[type="file"] {
 
 .Form-saveChangesBtn {
   background-color: rgb(55, 172, 114);
-  margin-left: var(--marginSmall);
+  margin-left: var(--Small);
 }
 
 .Stats {
   display: flex;
   justify-content: space-between;
-  width: 60%;
+  width: 55%;
   font-weight: bold;
   font-size: 18px;
   color: var(--violet);
@@ -264,7 +262,7 @@ input[type="file"] {
 }
 
 .Item-name {
-  margin-bottom: var(--marginSuperSmall);
+  margin-bottom: var(--SuperSmall);
   font-weight: bold;
 }
 
@@ -275,7 +273,7 @@ input[type="file"] {
   top: 20px;
   right: 50px;
   width: 70px;
-  padding: var(--paddingSuperSmall);
+  padding: var(--SuperSmall);
   border-radius: var(--radiusBig);
   background-color: var(--grey);
   cursor: pointer;
@@ -303,4 +301,22 @@ input[type="file"] {
 
 .RatingList {
   display: flex;
+}
+
+@media only screen and (max-width: 576px) and (orientation: portrait) {
+  .Header {
+    font-size: 22px;
+  }
+
+  .ToggleTheme {
+    display: none;
+  }
+
+  .Form-activeControls {
+    flex-direction: column;
+  }
+
+  .Stats {
+    width: 90%;
+  }
 }

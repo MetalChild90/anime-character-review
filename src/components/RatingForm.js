@@ -124,7 +124,7 @@ function RatingForm() {
       <form className="Form" onSubmit={handleSubmit} autoComplete="off">
         <div>
           <input
-            className="Form-input Form-inputSmall"
+            className="Form-input"
             type="text"
             name="name"
             value={rating.name || ""}
@@ -133,7 +133,7 @@ function RatingForm() {
             maxLength="20"
           />
           <input
-            className="Form-input Form-inputSmall"
+            className="Form-input"
             type="text"
             name="anime"
             value={rating.anime || ""}
@@ -141,17 +141,17 @@ function RatingForm() {
             placeholder="Origin anime"
             maxLength="30"
           />
+          <textarea
+            className="Form-input"
+            type="text"
+            name="review"
+            value={rating.review || ""}
+            onChange={handleChange}
+            placeholder="What you like / dislike about character?"
+            maxLength="300"
+          />
+          <p className="Form-symbolCount">{symbolsCount()}</p>
         </div>
-        <textarea
-          className="Form-input Form-inputBig"
-          type="text"
-          name="review"
-          value={rating.review || ""}
-          onChange={handleChange}
-          placeholder="What you like / dislike about character? (optional)"
-          maxLength="300"
-        />
-        <p className="Form-symbolCount">{symbolsCount()}</p>
         <div className="Form-activeControls">
           <label htmlFor="fileControl" className="custom-file-upload">
             <BsFillFileEarmarkArrowUpFill /> Pick Image
