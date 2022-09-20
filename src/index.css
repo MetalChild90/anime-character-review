@@ -202,12 +202,12 @@ input[type="file"] {
 
 .Button {
   display: inline-block;
-  text-align: center;
   max-width: 300px;
   margin: 0 auto;
   padding: var(--SuperSmall);
   border: 1px solid var(--black);
   border-radius: var(--radiusSmall);
+  text-align: center;
   font-size: 14px;
   background-color: var(--pink);
   color: var(--black);
@@ -224,10 +224,6 @@ input[type="file"] {
 .Button-huge {
   padding: var(--SuperSmall) var(--Normal);
   font-size: 18px;
-}
-
-.Button-normal {
-  font-size: 16px;
 }
 
 .Button-delete {
@@ -296,6 +292,7 @@ input[type="file"] {
 }
 
 .ToggleTheme-icon {
+  color: var(--black);
   z-index: 1;
 }
 

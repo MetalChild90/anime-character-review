@@ -15,6 +15,7 @@ Box.defaultProps = {
 Box.propTypes = {
   bgColor: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  color: PropTypes.string,
 };
 
 export default Box;

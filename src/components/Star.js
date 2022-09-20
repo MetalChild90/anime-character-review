@@ -32,6 +32,10 @@ Star.propTypes = {
   value: PropTypes.number.isRequired,
   isFilled: PropTypes.bool.isRequired,
   clickable: PropTypes.bool.isRequired,
+  color: PropTypes.string,
+  handleClick: PropTypes.func,
+  handleMouseEnter: PropTypes.func,
+  handleMouseLeave: PropTypes.func,
 };
 
 export default Star;

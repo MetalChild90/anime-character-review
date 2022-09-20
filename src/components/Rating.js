@@ -38,7 +38,7 @@ function Rating({ addScore, score }) {
       <p>{score ? meanings[score] : "Not Rated Yet"}</p>
       {Array.from({ length: 5 }, (_, i) => (
         <Star
-          key={i + 1}
+          key={i}
           color={colors[score]}
           isFilled={i + 1 <= dynamicValue}
           value={i + 1}

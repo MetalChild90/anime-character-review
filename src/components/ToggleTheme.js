@@ -9,10 +9,7 @@ function ToggleTheme() {
   return (
     <div className="ToggleTheme" onClick={toggleReverse}>
       <GrSun className="ToggleTheme-icon" />
-      <BsFillMoonStarsFill
-        className="ToggleTheme-icon"
-        style={{ color: "#010101" }}
-      />
+      <BsFillMoonStarsFill className="ToggleTheme-icon" />
       <span className={`ToggleTheme-switch ${reverse && "cliked"}`}></span>
     </div>
   );
