@@ -63,7 +63,6 @@ body {
   padding: var(--Normal);
   margin: var(--Medium);
   border-radius: var(--radiusMedium);
-  color: var(--white);
 }
 
 .Item {
@@ -74,7 +73,9 @@ body {
   position: absolute;
   top: 0;
   left: -75px;
-  min-width: 350px;
+  width: 350px;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .Item-closeReview {
@@ -165,6 +166,10 @@ body {
 
 .Form-symbolCount {
   text-align: right;
+}
+
+.Form-message {
+  margin-top: var(--SuperSmall);
 }
 
 input[type="file"] {
@@ -298,11 +303,13 @@ input[type="file"] {
 
 .RatingList {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-@media only screen and (max-width: 576px) and (orientation: portrait) {
-  .Header {
-    font-size: 22px;
+@media (max-width: 576px) {
+  .Box {
+    margin: var(--Medium) var(--SuperSmall);
   }
 
   .ToggleTheme {

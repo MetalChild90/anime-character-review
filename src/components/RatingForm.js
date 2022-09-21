@@ -81,6 +81,14 @@ function RatingForm() {
     ) {
       setMessage("Please, choose score");
       return;
+    } else if (
+      rating.review === undefined ||
+      rating.review === "" ||
+      rating.review === null ||
+      rating.review.length < 50
+    ) {
+      setMessage("Review must be at least 50 characters");
+      return;
     } else {
       if (edition.edit) {
         updateRating(edition.item.id, rating);
