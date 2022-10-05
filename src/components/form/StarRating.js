@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
-import Star from "./Star";
+import PropTypes from "prop-types";
+import Star from "../Star";
 
 function Rating({ addScore, score }) {
   const [dynamicValue, setDynamicValue] = useState(0);

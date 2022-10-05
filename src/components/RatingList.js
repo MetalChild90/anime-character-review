@@ -1,13 +1,15 @@
 import { useContext } from "react";
 import RatingContext from "../context/RatingContext";
-import RatingItem from "./RatingItem";
+import RatingItem from "./item/RatingItem";
 
 const RatingList = () => {
   const { ratings, reverse } = useContext(RatingContext);
 
   if (!ratings || ratings.length === 0) {
     return (
-      <p style={{ color: !reverse && "#796b93" }}>No charactes rated yet</p>
+      <p className="no-reviews-info" style={{ color: !reverse && "#796b93" }}>
+        No charactes rated yet
+      </p>
     );
   }
 

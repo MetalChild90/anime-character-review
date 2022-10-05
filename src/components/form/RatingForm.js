@@ -1,22 +1,24 @@
-import { useContext, useEffect, useState } from "react";
-import RatingContext from "../context/RatingContext";
-import { BsFillFileEarmarkArrowUpFill } from "react-icons/bs";
-import Box from "./shared/Box";
-import Rating from "./Rating";
-import $ from "jquery";
+import { useCallback, useContext, useEffect, useState } from "react";
+import RatingContext from "../../context/RatingContext";
+import Box from "../shared/Box";
+import StarRating from "./StarRating";
+import FormInput from "./FormInput";
+import FormImageInput from "./FormImageInput";
+import FormButtons from "./FormButtons";
 
 function RatingForm() {
-  const { addRating, updateRating, edition, setEdition } =
-    useContext(RatingContext);
+  const { addRating, updateRating, edition } = useContext(RatingContext);
 
   const [rating, setRating] = useState({
     name: "",
     anime: "",
     review: "",
     score: 0,
-    image: "",
+    image: null,
   });
 
+  // eslint-disable-next-line
+  const [fileInputRef, setFileInputRef] = useState(null);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -45,12 +47,16 @@ function RatingForm() {
       let fileInfo = {
         size: file.size,
         base64: reader.result,
+        name: file.name,
       };
       if (fileInfo.size > 100000) {
         setMessage("Please, chose picture up to 100kB");
         return;
       }
-      setRating({ ...rating, image: fileInfo.base64 });
+      setRating({
+        ...rating,
+        image: { file: fileInfo.base64, name: fileInfo.name },
+      });
     };
     reader.onerror = function (error) {
       console.log("Error: ", error);
@@ -100,18 +106,13 @@ function RatingForm() {
     cleanForm();
   };
 
-  const symbolsCount = () => {
+  const symbolsCount = useCallback(() => {
     if (rating.review !== undefined) {
       return rating.review.length > 0 ? `${rating.review.length}/300` : "0/300";
     } else {
       return "0/300";
     }
-  };
-
-  const handleDiscardChanges = () => {
-    cleanForm();
-    setEdition({ edit: false, item: {} });
-  };
+  }, [rating.review]);
 
   const cleanForm = () => {
     setRating({
@@ -119,35 +120,29 @@ function RatingForm() {
       anime: "",
       review: "",
       score: 0,
-      image: "",
+      image: null,
     });
 
     setMessage("");
 
-    $("#fileControl").val("");
+    setFileInputRef(null);
   };
 
   return (
     <Box>
       <form className="Form" onSubmit={handleSubmit} autoComplete="off">
         <div>
-          <input
-            className="Form-input"
-            type="text"
+          <FormInput
             name="name"
             value={rating.name || ""}
-            onChange={handleChange}
             placeholder="Character name"
-            maxLength="20"
+            handleChange={handleChange}
           />
-          <input
-            className="Form-input"
-            type="text"
+          <FormInput
             name="anime"
             value={rating.anime || ""}
-            onChange={handleChange}
             placeholder="Origin anime"
-            maxLength="30"
+            handleChange={handleChange}
           />
           <textarea
             className="Form-input"
@@ -161,40 +156,16 @@ function RatingForm() {
           <p className="Form-symbolCount">{symbolsCount()}</p>
         </div>
         <div className="Form-activeControls">
-          <label htmlFor="fileControl" className="custom-file-upload">
-            <BsFillFileEarmarkArrowUpFill /> Pick Image
-          </label>
-          <input
-            type="file"
-            onChange={handleImageChange}
-            multiple={false}
-            id="fileControl"
+          <FormImageInput
+            handleImageChange={handleImageChange}
+            setFileInputRef={setFileInputRef}
           />
-          <Rating
+          <StarRating
             score={rating.score}
             addScore={(value) => setRating({ ...rating, score: value })}
           />
         </div>
-        {edition.edit ? (
-          <div className="Form-editButtons">
-            <button
-              className="Button Button-huge Button-delete"
-              onClick={handleDiscardChanges}
-            >
-              Discard Changes
-            </button>
-            <button
-              className="Button Button-huge Form-saveChangesBtn"
-              type="submit"
-            >
-              Save Changes
-            </button>
-          </div>
-        ) : (
-          <button className="Button Button-huge" type="submit">
-            Send Rating
-          </button>
-        )}
+        <FormButtons cleanForm={cleanForm} />
         {message && <p className="Form-message">{message}</p>}
       </form>
     </Box>

@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import RatingForm from "./components/RatingForm";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import RatingForm from "./components/form/RatingForm";
 import RatingList from "./components/RatingList";
 import RatingStats from "./components/RatingStats";
 import { RatingProvider } from "./context/RatingContext";

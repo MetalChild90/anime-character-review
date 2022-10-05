@@ -1,7 +1,7 @@
 import { GrSun } from "react-icons/gr";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { useContext } from "react";
-import RatingContext from "../context/RatingContext";
+import RatingContext from "../../context/RatingContext";
 
 function ToggleTheme() {
   const { reverse, toggleReverse } = useContext(RatingContext);

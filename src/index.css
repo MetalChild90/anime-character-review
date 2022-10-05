@@ -1,10 +1,10 @@
 :root {
   --black: #010101;
   --black-opacity: rgba(0, 0, 0, 0.4);
-  --red: rgb(236, 78, 78);
   --white: #f1f1f1;
   --white-opacity: rgba(255, 255, 255, 0.6);
   --grey: rgb(58, 56, 56);
+  --red: rgb(236, 78, 78);
   --blue: #22234d;
   --violet: #796b93;
   --pink: #efd4e7;
@@ -51,6 +51,12 @@ body {
   padding: var(--Small);
   text-align: center;
   background-color: var(--black-opacity);
+}
+
+@media (max-width: 576px) {
+  .Header h1 {
+    font-size: 25px;
+  }
 }
 
 .Footer {
@@ -175,10 +181,10 @@ body {
 input[type="file"] {
   display: none;
 }
-.custom-file-upload {
+
+.Form-file-input {
   display: inline-block;
   max-width: 200px;
-  margin: var(--Small);
   padding: var(--SuperSmall) var(--Small);
   border: 1px solid var(--white);
   border-radius: var(--radiusSmall);
@@ -187,10 +193,16 @@ input[type="file"] {
   cursor: pointer;
 }
 
-.custom-file-upload:hover {
-  border: 1px solid var(--violet);
-  background-color: var(--white);
-  color: var(--violet);
+.Form-image-name {
+  margin: var(--SuperSmall) 0 var(--Small) 0;
+}
+
+@media (min-width: 1200px) {
+  .Form-file-input:hover {
+    border: 1px solid var(--violet);
+    background-color: var(--white);
+    color: var(--violet);
+  }
 }
 
 .Form-activeControls {
@@ -220,10 +232,12 @@ input[type="file"] {
   cursor: pointer;
 }
 
-.Button:hover {
-  background-color: var(--violet);
-  color: var(--pink);
-  border-color: var(--pink);
+@media (min-width: 1200px) {
+  .Button:hover {
+    background-color: var(--violet);
+    color: var(--pink);
+    border-color: var(--pink);
+  }
 }
 
 .Button-huge {
@@ -301,6 +315,12 @@ input[type="file"] {
   z-index: 1;
 }
 
+@media (max-width: 576px) {
+  .Rating {
+    margin-top: var(--Normal);
+  }
+}
+
 .RatingList {
   display: flex;
   flex-wrap: wrap;
@@ -323,4 +343,8 @@ input[type="file"] {
   .Stats {
     width: 90%;
   }
+}
+
+.no-reviews-info {
+  margin: var(--Medium);
 }
